@@ -49,6 +49,8 @@ void ACabinCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 void ACabinCharacter::Move(const FInputActionValue& Value)
 {
+
+	UE_LOG(LogTemp, Warning, TEXT("Moving with: %s"), *Value.ToString());
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
 	if (Controller != nullptr)
@@ -85,7 +87,7 @@ void ACabinCharacter::Interact()
 	if (bHit)
 	{
 		// Draw a debug line to see the interaction
-		DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 2.0f);
+		DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 5.0f);
 
 		if (AActor* HitActor = HitResult.GetActor())
 		{
