@@ -11,7 +11,7 @@ ACabinCharacter::ACabinCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	// 1. Create Camera
+	// Create Camera
 	FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	FirstPersonCamera->SetupAttachment(GetCapsuleComponent());
 
@@ -24,7 +24,7 @@ void ACabinCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// 2. Add Input Mapping Context
+	// Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
@@ -38,7 +38,7 @@ void ACabinCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	// 3. Bind Actions
+	// Bind Actions
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ACabinCharacter::Move);
@@ -74,7 +74,7 @@ void ACabinCharacter::Look(const FInputActionValue& Value)
 
 void ACabinCharacter::Interact()
 {
-	// 4. The Puzzle Interaction Logic (Line Trace)
+	// The Puzzle Interaction Logic (Line Trace)
 	FVector Start = FirstPersonCamera->GetComponentLocation();
 	FVector End = Start + (FirstPersonCamera->GetForwardVector() * 300.f); // 3 meters reach
 
